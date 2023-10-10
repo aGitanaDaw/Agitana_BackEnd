@@ -10,4 +10,5 @@ public class AgitanaApplication {
 		SpringApplication.run(AgitanaApplication.class, args);
 	}
 
+
 }
