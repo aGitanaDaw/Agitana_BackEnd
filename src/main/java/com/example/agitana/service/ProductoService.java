@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Getter
-public class ProductoService {
+public class  ProductoService {
 
     private final ProductoRepository productoRepository;
 
