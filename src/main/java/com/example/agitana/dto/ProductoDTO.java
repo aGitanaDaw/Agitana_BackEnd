@@ -2,7 +2,7 @@ package com.example.agitana.dto;
 
 import lombok.Data;
 @Data
-public class productoDTO {
+public class ProductoDTO {
     private Integer id;
     private String nombre;
     private Integer id_categoria;

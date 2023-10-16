@@ -2,7 +2,7 @@ package com.example.agitana.controller;
 
 
 
-import com.example.agitana.models.productos;
+import com.example.agitana.models.Producto;
 
 import com.example.agitana.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ProductoController {
     }
 
     @GetMapping(value = "/listar")
-    public List<productos> listarProductos() {
+    public List<Producto> listarProductos() {
         return productoService.listarProductos();
     }
 }

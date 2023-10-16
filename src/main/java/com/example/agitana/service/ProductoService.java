@@ -1,7 +1,7 @@
 package com.example.agitana.service;
 
 import com.example.agitana.Repository.ProductoRepository;
-import com.example.agitana.models.productos;
+import com.example.agitana.models.Producto;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public List<productos> listarProductos() {
+    public List<Producto> listarProductos() {
         return productoRepository.findAll();
     }
 
