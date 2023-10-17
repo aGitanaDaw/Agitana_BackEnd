@@ -1,18 +1,18 @@
 package com.example.agitana.models;
 
-import com.example.agitana.enums.TipoPersona;
-import com.example.agitana.enums.TipoRol;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "usuario", schema ="AGitana" )
+@Table(name = "almacen", schema ="AGitana" )
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class usuario {
+public class Almacen {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,6 @@ public class usuario {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "contrasenya")
-    private String contrasenya;
-
-    @Column(name = "rol")
-    @Enumerated(EnumType.ORDINAL)
-    private TipoRol tiporol;
-
+    @Column(name = "fecha_entrada")
+    private Date fecha_entrada;
 }

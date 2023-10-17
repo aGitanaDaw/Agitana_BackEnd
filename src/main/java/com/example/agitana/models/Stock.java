@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class stock {
+public class Stock {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,9 @@ public class stock {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
-    private com.example.agitana.models.productos id_producto;
+    private com.example.agitana.models.Producto id_producto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_almacen")
-    private com.example.agitana.models.almacen id_almacen;
+    private Almacen id_almacen;
 }

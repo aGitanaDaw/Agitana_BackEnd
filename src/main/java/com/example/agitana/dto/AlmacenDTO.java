@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class almacenDTO {
+public class AlmacenDTO {
     private Integer id;
     private String nombre;
     private Date fecha_entrada;

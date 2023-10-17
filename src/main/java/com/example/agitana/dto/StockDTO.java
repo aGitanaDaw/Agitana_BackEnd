@@ -3,7 +3,7 @@ package com.example.agitana.dto;
 import lombok.Data;
 
 @Data
-public class stockDTO {
+public class StockDTO {
     private Integer id;
     private Integer cantidad;
     private Integer id_producto;
