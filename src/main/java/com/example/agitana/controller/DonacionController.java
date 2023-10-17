@@ -2,6 +2,7 @@ package com.example.agitana.controller;
 
 
 
+import com.example.agitana.Repository.DonacionRepository;
 import com.example.agitana.models.Donacion;
 
 import com.example.agitana.service.DonacionService;
@@ -15,6 +16,8 @@ import java.util.List;
 @RequestMapping(path = "/donacion")
 public class DonacionController {
 
+    @Autowired
+    DonacionRepository donacionRepository;
     public final DonacionService donacionService;
 
     @Autowired
@@ -27,28 +30,26 @@ public class DonacionController {
         return donacionService.listarDonacion();
     }
 
-    //@PostMapping(value = "/crear")
-    //public ResponseEntity<Donacion> crearDonacion(Donacion donacion) {
-        //try {
-           // Donacion _donacion = DonacionRepository.save(new Donacion(donacion.getCantidad(), donacion.getDescripcion_producto(),
-             //       donacion.getId_tipo(), donacion.getId_persona(), donacion.getEstado()));
-          //  return new ResponseEntity<>(_donacion, HttpStatus.CREATED);
-       // } catch (Exception e) {
-        //    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-      //  }
-
-  //  }
-
-    @DeleteMapping("/donacion/{id_donacion}")
-    public ResponseEntity<HttpStatus> eliminarDonacion(@PathVariable("id_donacion") long donacion_id) {
-        ResponseEntity<HttpStatus> result;
-        try {
-            //donacionRepository.deleteById(id_donacion);
-            result = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            result = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @PostMapping(value = "/crear")
+    public ResponseEntity<Donacion> crearDonacion(Donacion donacion) {
+       try {
+        Donacion _donacion = donacionRepository.save(new Donacion(donacion.getId(),donacion.getCantidad(), donacion.getDescripcion_producto(),
+                    donacion.getId_tipo(), donacion.getId_persona(), donacion.getEstado()));
+            return new ResponseEntity<>(_donacion, HttpStatus.CREATED);
+       } catch (Exception e) {
+           return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return result;
+
+  }
+
+    @DeleteMapping("/donacion/{id}")
+    public ResponseEntity<HttpStatus> eliminarDonacion(@PathVariable("id") long id) {
+        try {
+            donacionRepository.deleteById((int) id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

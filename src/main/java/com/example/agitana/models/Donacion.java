@@ -30,6 +30,6 @@ public class Donacion {
     @Column(name = "estado")
     private String estado;
 
-    public Donacion(Integer cantidad, String descripcionProducto, Integer idTipo, Integer idPersona, String estado) {
+    public Donacion(Integer id,Integer cantidad, String descripcionProducto, Integer idTipo, Integer idPersona, String estado) {
     }
 }
