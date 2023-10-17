@@ -22,11 +22,11 @@ public class Solicitudes {
     private TipoSolicitud tipoSolicitud;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_almacen")
-    private com.example.agitana.models.almacen almacen;
+    private Almacen almacen;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona")
-    private com.example.agitana.models.persona persona;
+    private com.example.agitana.models.Persona persona;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
-    private com.example.agitana.models.categoria categoria;
+    private com.example.agitana.models.Categoria categoria;
 }

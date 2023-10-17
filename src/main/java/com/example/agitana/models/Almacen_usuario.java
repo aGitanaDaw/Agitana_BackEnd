@@ -13,10 +13,10 @@ public class Almacen_usuario {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_almacen")
-    private com.example.agitana.models.almacen almacen;
+    private Almacen almacen;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
-    private com.example.agitana.models.usuario usuario;
+    private com.example.agitana.models.Usuario usuario;
 
 }

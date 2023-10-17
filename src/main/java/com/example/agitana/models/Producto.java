@@ -22,7 +22,7 @@ public class Producto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo")
-    private com.example.agitana.models.tipo tipo;
+    private Tipo tipo;
 
 }
 

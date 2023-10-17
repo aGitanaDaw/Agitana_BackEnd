@@ -4,7 +4,7 @@ import com.example.agitana.enums.TipoRol;
 import lombok.Data;
 
 @Data
-public class usuarioDTO {
+public class UsuarioDTO {
     private Integer id;
     private String nombre;
     private String contrasenya;
