@@ -20,6 +20,7 @@ public class CategoriaService {
     private CategoriaMapper categoriaMapper;
     @Autowired
     public CategoriaService(CategoriaRepository categoriaRepository) {
+
         this.categoriaRepository = categoriaRepository;
     }
     public List<CategoriaDTO> listarCategoria() {
