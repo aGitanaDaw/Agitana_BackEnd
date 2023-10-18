@@ -4,7 +4,7 @@ import com.example.agitana.enums.TipoPersona;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
-@Table(name = "persona", schema ="AGitana" )
+@Table(name = "persona", schema ="public" )
 @Getter
 @Setter
 @AllArgsConstructor
