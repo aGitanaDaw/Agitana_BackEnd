@@ -17,10 +17,12 @@ public class DonacionService {
 
     @Autowired
     public DonacionService(DonacionRepository donacionRepository) {
+
         this.donacionRepository = donacionRepository;
     }
 
     public List<Donacion> listarDonacion() {
+
         return donacionRepository.findAll();
     }
 
