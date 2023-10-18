@@ -3,7 +3,7 @@ package com.example.agitana.models;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
-@Table(name = "tipo", schema ="AGitana" )
+@Table(name = "tipo", schema ="public" )
 @Getter
 @Setter
 @AllArgsConstructor

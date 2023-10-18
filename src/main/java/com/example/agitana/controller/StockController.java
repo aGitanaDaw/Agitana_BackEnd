@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController()
 @RequestMapping(path = "/stock")
 public class StockController {
-    @Autowired
-    private final ProductoService productoService;
+ //   @Autowired
+  //  private final ProductoService productoService;
 
-    @GetMapping(value = "/listar")
-    public List<ProductoDTO> listarProductos(){
-        return productoService.listarProductos();
-    }
+   // @GetMapping(value = "/listar")
+  // public List<ProductoDTO> listarProductos(){
+    //    return productoService.listarProductos();
+  //  }
 }
