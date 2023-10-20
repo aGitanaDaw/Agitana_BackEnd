@@ -37,7 +37,9 @@ public class ProductoController {
     }
     @PostMapping(value = "/crear")
     public ProductoDTO createProducto(@RequestBody ProductoDTO dto){
+
         return productoService.createProducto(dto);
+
     }
 
     @PutMapping(value = "/modificar")
