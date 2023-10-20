@@ -19,18 +19,21 @@ public class Persona {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellido_primero")
-    private String apellido_primero;
+    @Column(name = "apellido_Primero")
+    private String apellido_Primero;
 
-    @Column(name = "apellido_segundo")
-    private String apellido_segundo;
+    @Column(name = "apellido_Segundo")
+    private String apellido_Segundo;
+
+    @Column(name = "telefono")
+    private String telefono;
 
     @Column(name = "dni")
     private String dni;
 
-    @Column(name = "tipo")
+    @Column(name = "tipo_Persona")
     @Enumerated(EnumType.ORDINAL)
-    private TipoPersona tipo;
+    private TipoPersona tipoPersona;
 
 
 }
