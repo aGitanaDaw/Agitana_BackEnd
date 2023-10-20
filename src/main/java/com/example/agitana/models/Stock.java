@@ -21,9 +21,9 @@ public class Stock {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
-    private com.example.agitana.models.Producto id_producto;
+    private Producto producto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_almacen")
-    private Almacen id_almacen;
+    private Almacen almacen;
 }
