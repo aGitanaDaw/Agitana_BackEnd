@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class UsuarioDTO {
     private Integer id;
-    private String nombre;
-    private String contrasenya;
-    private Integer id_almacen_usuario;
+    private String username;
+    private String password;
+    private PersonaDTO personaDTO;
     private TipoRol tipoRol;
 }

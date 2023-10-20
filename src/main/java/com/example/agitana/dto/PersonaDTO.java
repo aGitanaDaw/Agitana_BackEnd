@@ -6,9 +6,9 @@ import lombok.Data;
 public class PersonaDTO {
     private Integer id;
     private String nombre;
-    private String apellido_primero;
-    private String apellido_segundo;
+    private String apellido_Primero;
+    private String apellido_Segundo;
     private String telefono;
     private String dni;
-    private TipoPersona tipopersona;
+    private TipoPersona tipoPersona;
 }

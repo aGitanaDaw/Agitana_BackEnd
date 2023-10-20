@@ -3,6 +3,10 @@ package com.example.agitana.models;
 import com.example.agitana.enums.TipoRol;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Entity
 @Table(name = "usuario", schema ="public" )
@@ -11,19 +15,48 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Usuario {
+public class Usuario implements UserDetails {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nombre")
-    private String nombre;
+    private String username;
 
     @Column(name = "contrasenya")
-    private String contrasenya;
+    private String password;
 
     @Column(name = "rol")
     @Enumerated(EnumType.ORDINAL)
-    private TipoRol tiporol;
+    private TipoRol tipoRol;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_persona")
+    private Persona persona;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
