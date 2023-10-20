@@ -5,8 +5,11 @@ import com.example.agitana.Repository.ProductoRepository;
 import com.example.agitana.Repository.TipoRepository;
 import com.example.agitana.converter.ProductoMapper;
 import com.example.agitana.dto.ProductoDTO;
+import com.example.agitana.dto.StockDTO;
+import com.example.agitana.dto.TipoDTO;
 import com.example.agitana.models.Categoria;
 import com.example.agitana.models.Producto;
+import com.example.agitana.models.Stock;
 import com.example.agitana.models.Tipo;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +35,17 @@ public class  ProductoService {
     public ProductoService(ProductoRepository productoRepository) {
         this.productoRepository = productoRepository;
     }
-
+    public Producto getById(Integer id){
+        return productoRepository.findById(id).orElse(null);
+    }
     public List<ProductoDTO> listarProductos() {
         return productoMapper.toDTO(productoRepository.findAll());
+    }
+    private ProductoDTO conversor(Producto producto){
+        ProductoDTO productoDTO = new ProductoDTO();
+        productoDTO.setId(producto.getId());
+        productoDTO.setNombre(producto.getNombre());
+        return productoDTO;
     }
     public ProductoDTO listarProductoPorId(Integer id) {
         Optional<Producto> productoOptional = productoRepository.findById(id);
