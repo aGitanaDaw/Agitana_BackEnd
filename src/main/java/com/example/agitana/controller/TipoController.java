@@ -21,7 +21,7 @@ public class TipoController {
     }
 
     @GetMapping(value = "/listar")
-    public List<TipoDTO> listarCategoria() {
+    public List<TipoDTO> listarTipo() {
         return tipoService.listarTipo();
     }
 }

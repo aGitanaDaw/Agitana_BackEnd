@@ -1,13 +1,9 @@
 package com.example.agitana.service;
 
 import com.example.agitana.Repository.PersonaRepository;
-import com.example.agitana.Repository.TipoRepository;
 import com.example.agitana.converter.PersonaMapper;
-import com.example.agitana.converter.TipoMapper;
 import com.example.agitana.dto.PersonaDTO;
-import com.example.agitana.dto.TipoDTO;
 import com.example.agitana.models.Persona;
-import com.example.agitana.models.Tipo;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +31,34 @@ public class PersonaService {
     }
 
 
-    private PersonaDTO convertir(Persona persona){
-        PersonaDTO personaDTO = new PersonaDTO();
-        personaDTO.setId(persona.getId());
-        personaDTO.setNombre(persona.getNombre());
 
-        return  personaDTO;
+    public PersonaDTO crearPersona(PersonaDTO personaDTO){
+        return personaMapper.toDTO(personaRepository.save(personaMapper.toEntity(personaDTO)));
+    }
+    public Persona modificarPersona(PersonaDTO personaDTO){
+        Persona persona = personaRepository.findById(personaDTO.getId()).orElse(null);
+
+        if(persona == null){
+            return null;
+        }else{
+            persona.setNombre(personaDTO.getNombre());
+            persona.setApellido_Primero(personaDTO.getApellido_Primero());
+            persona.setApellido_Segundo(personaDTO.getApellido_Segundo());
+            persona.setTelefono(personaDTO.getTelefono());
+            persona.setDni(personaDTO.getDni());
+            persona.setTipoPersona(personaDTO.getTipoPersona());
+            Persona personaModificado = personaRepository.save(persona);
+            return personaModificado;
+        }
+
+    }
+    public String eliminarPersona(PersonaDTO personaDTO){
+        Persona personaEliminar = personaRepository.findById(personaDTO.getId()).orElse(null);
+        if(personaEliminar != null){
+            personaRepository.delete(personaEliminar);
+            return "Datos eliminados correctamente";
+        }else{
+            return "No se ha podido eliminar su producto";
+        }
     }
 }
