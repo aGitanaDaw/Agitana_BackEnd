@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "/Categoria")
+@RequestMapping(path = "/Admin/Categoria")
 public class CategoriaController {
 
     private final CategoriaService categoriaService;

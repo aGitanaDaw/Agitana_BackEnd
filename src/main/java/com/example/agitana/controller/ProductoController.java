@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/productos")
+@RequestMapping(path = "/Admin/Productos")
 public class ProductoController {
 
     private final ProductoService productoService;

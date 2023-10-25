@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/donacion")
+@RequestMapping(path = "/Admin/Donacion")
 public class DonacionController {
 
     @Autowired
