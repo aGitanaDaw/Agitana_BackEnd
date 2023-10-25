@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "/stock")
+@RequestMapping(path = "/Admin/Stock")
 public class StockController {
     @Autowired
     private final StockService stockService;

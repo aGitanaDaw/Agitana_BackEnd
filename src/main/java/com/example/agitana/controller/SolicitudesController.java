@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/Solicitudes")
+@RequestMapping(path = "/Admin/Solicitudes")
 public class SolicitudesController {
     //crear, eliminar y listar
     private final SolicitudesService solicitudesService;
