@@ -15,6 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Arrays;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
@@ -45,19 +48,28 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> {
+            CorsConfiguration corsConfiguration = new CorsConfiguration();
+            corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+            corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+            corsConfiguration.setAllowCredentials(true);
+            corsConfiguration.addAllowedHeader("*");
+
+            cors.configurationSource(request -> corsConfiguration);
+        })
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/Admin/**").hasAnyRole(TipoRol.ADMIN.name())
-                                .requestMatchers("/User/**").hasAnyRole(TipoRol.USER.name())
-                                .requestMatchers(GET, "**/Persona/**").hasAnyAuthority(TipoRol.ADMIN.name())
-                                .requestMatchers(GET, "**/Productos/**").hasAnyAuthority(TipoRol.ADMIN.name())
-                                .requestMatchers(GET, "**/Tipo/**").hasAnyAuthority(TipoRol.ADMIN.name())
-                                .requestMatchers(GET, "**/Categoria/**").hasAnyAuthority(TipoRol.ADMIN.name())
-                                .requestMatchers(GET, "**/Stock/**").hasAnyAuthority(TipoRol.ADMIN.name())
-                                .requestMatchers(GET, "**/Almacen/**").hasAnyAuthority(TipoRol.ADMIN.name())
-                                .requestMatchers(GET, "**/Solicitudes/**").hasAnyAuthority(TipoRol.ADMIN.name(), TipoRol.USER.name())
-                                .requestMatchers(GET, "**/Donaciones/**").hasAnyAuthority(TipoRol.ADMIN.name(), TipoRol.USER.name())
+                                .requestMatchers("/Admin/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers("/User/**").hasAnyAuthority(TipoRol.USER.name())
+                                .requestMatchers(GET, "/Persona/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers(GET, "/Productos/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers(GET, "/Tipo/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers(GET, "/Categoria/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers(GET, "/Stock/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers(GET, "/Almacen/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers(GET, "/Solicitudes/**").hasAnyAuthority(TipoRol.ADMIN.name(), TipoRol.USER.name())
+                                .requestMatchers(GET, "/Donaciones/**").hasAnyAuthority(TipoRol.ADMIN.name(), TipoRol.USER.name())
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))

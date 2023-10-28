@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/Admin/Almacen")
+@RequestMapping(path = "/almacen")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AlmacenController {
     private final AlmacenService almacenService;
 

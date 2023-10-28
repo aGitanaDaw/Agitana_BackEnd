@@ -1,8 +1,6 @@
 package com.example.agitana.controller;
 
-import com.example.agitana.dto.AlmacenDTO;
 import com.example.agitana.dto.StockDTO;
-import com.example.agitana.models.Almacen;
 import com.example.agitana.models.Stock;
 import com.example.agitana.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping(path = "/Admin/Stock")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StockController {
     @Autowired
     private final StockService stockService;

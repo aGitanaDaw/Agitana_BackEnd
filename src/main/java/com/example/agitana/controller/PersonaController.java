@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/Admin/Persona")
+@RequestMapping(path = "/persona")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PersonaController {
     private final PersonaService personaService;
 
@@ -26,7 +27,7 @@ public class PersonaController {
     @PostMapping(value = "/crear")
     public PersonaDTO crearPersona(@RequestBody PersonaDTO dto){
         return personaService.crearPersona(dto);
-    } 
+    }
     @PutMapping(value = "/modificar")
     public Persona modificarPersona(@RequestBody PersonaDTO personaDTO){
         return personaService.modificarPersona(personaDTO);
