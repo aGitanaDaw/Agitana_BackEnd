@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService implements UserDetailsService {
 
@@ -45,5 +47,35 @@ public class UsuarioService implements UserDetailsService {
     public Boolean existByCredentials(String username, String password) {
         Usuario usuario = usuarioRepository.findTopByUsername(username).orElse(null);
         return usuario != null && passwordEncoder.matches(password, usuario.getPassword());
+    }
+    public List<UsuarioDTO> listarUsuario() {
+        return usuarioMapper.toDTO(usuarioRepository.findAll());
+    }
+    public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO){
+        return usuarioMapper.toDTO(usuarioRepository.save(usuarioMapper.toEntity(usuarioDTO)));
+    }
+    public Usuario modificarUsuario(UsuarioDTO usuarioDTO){
+        Usuario usuario = usuarioRepository.findById(usuarioDTO.getId()).orElse(null);
+
+        if(usuario == null){
+            return null;
+        }else{
+            usuario.setUsername(usuarioDTO.getUsername());
+            usuario.setPassword(usuarioDTO.getPassword());
+            usuario.setTipoRol(usuarioDTO.getTipoRol());
+            Usuario usuarioModificado = usuarioRepository.save(usuario);
+            return usuarioModificado;
+
+        }
+
+    }
+    public String eliminarUsuario(UsuarioDTO usuarioDTO){
+        Usuario usuarioEliminar = usuarioRepository.findById(usuarioDTO.getId()).orElse(null);
+        if(usuarioEliminar != null){
+            usuarioRepository.delete(usuarioEliminar);
+            return "Datos eliminados correctamente";
+        }else{
+            return "No se ha podido eliminar su producto";
+        }
     }
 }
