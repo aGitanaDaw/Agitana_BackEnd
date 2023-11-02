@@ -15,5 +15,5 @@ public class AuthenticationResponseDTO {
     private String message;
     private String rol;
     private String tipo;
-
+    private Integer id;
 }

@@ -2,7 +2,9 @@ package com.example.agitana.service;
 
 import com.example.agitana.Repository.UsuarioRepository;
 import com.example.agitana.converter.UsuarioMapper;
+import com.example.agitana.dto.ProductoDTO;
 import com.example.agitana.dto.UsuarioDTO;
+import com.example.agitana.models.Producto;
 import com.example.agitana.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService implements UserDetailsService {
@@ -76,6 +79,16 @@ public class UsuarioService implements UserDetailsService {
             return "Datos eliminados correctamente";
         }else{
             return "No se ha podido eliminar su producto";
+        }
+    }
+    public UsuarioDTO listarUsuarioPorId(Integer id) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            return usuarioMapper.toDTO(usuario);
+        } else {
+            return null;
         }
     }
 }

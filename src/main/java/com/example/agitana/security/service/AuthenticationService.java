@@ -59,7 +59,7 @@ public class AuthenticationService {
                             .token(token)
                             .message("Login success")
                             .rol(user.getTipoRol().name())
-
+                            .id(user.getId())
                             .build();
 
                 }else{
@@ -69,6 +69,7 @@ public class AuthenticationService {
                             .message("Login success")
                             .rol(user.getTipoRol().name())
                             .tipo(String.valueOf(user.getPersonaDTO().getTipoPersona()))
+                            .id(user.getId())
                             .build();
                 }
 

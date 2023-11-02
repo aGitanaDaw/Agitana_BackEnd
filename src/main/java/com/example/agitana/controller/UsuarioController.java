@@ -1,8 +1,10 @@
 package com.example.agitana.controller;
 
+import com.example.agitana.dto.ProductoDTO;
 import com.example.agitana.dto.UsuarioDTO;
 import com.example.agitana.models.Usuario;
 import com.example.agitana.service.UsuarioService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +24,17 @@ public class UsuarioController {
     public List<UsuarioDTO> listarUsuario() {
         return usuarioService.listarUsuario();
     }
+
+    @GetMapping(value = "/listar/{id}")
+    public ResponseEntity<UsuarioDTO> obtenerProductoPorId(@PathVariable Integer id) {
+        UsuarioDTO usuarioDTO = usuarioService.listarUsuarioPorId(id);
+
+        if (usuarioDTO != null) {
+            return ResponseEntity.ok(usuarioDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @PostMapping(value = "/crear")
     public UsuarioDTO createUsuario(@RequestBody UsuarioDTO dto){
 
@@ -35,4 +48,5 @@ public class UsuarioController {
     public String eliminarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return usuarioService.eliminarUsuario(usuarioDTO);
     }
+
 }
