@@ -52,11 +52,27 @@ public class AuthenticationService {
                 )
         );
         String token = jwtService.generateToken(usuarioMapper.toEntity(user));
-        return  AuthenticationResponseDTO
-                .builder()
-                .token(token)
-                .message("Login success")
-                .build();
+
+                if(user.getTipoRol().name()=="ADMIN"){
+                    return AuthenticationResponseDTO
+                            .builder()
+                            .token(token)
+                            .message("Login success")
+                            .rol(user.getTipoRol().name())
+
+                            .build();
+
+                }else{
+                    return AuthenticationResponseDTO
+                            .builder()
+                            .token(token)
+                            .message("Login success")
+                            .rol(user.getTipoRol().name())
+                            .tipo(String.valueOf(user.getPersonaDTO().getTipoPersona()))
+                            .build();
+                }
+
+
     }
 
     public boolean verifyPassword(LoginDTO loginDTO){

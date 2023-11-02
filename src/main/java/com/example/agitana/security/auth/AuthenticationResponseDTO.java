@@ -13,4 +13,7 @@ public class AuthenticationResponseDTO {
 
     private String token;
     private String message;
+    private String rol;
+    private String tipo;
+
 }

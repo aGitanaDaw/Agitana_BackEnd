@@ -1,19 +1,42 @@
 package com.example.agitana.converter;
 
+import com.example.agitana.dto.PersonaDTO;
 import com.example.agitana.dto.UsuarioDTO;
+import com.example.agitana.models.Persona;
 import com.example.agitana.models.Usuario;
+import com.example.agitana.service.PersonaService;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface UsuarioMapper {
+public abstract class UsuarioMapper {
 
-    UsuarioDTO toDTO(Usuario entity);
+    @Autowired
+    protected PersonaService personaService;
+    PersonaMapper personaMapper = Mappers.getMapper(PersonaMapper.class);
 
-    Usuario toEntity(UsuarioDTO dto);
+    @Mapping(source = "persona", target = "personaDTO", qualifiedByName = "conversorpersonaDTO")
+    public abstract UsuarioDTO toDTO(Usuario entity);
 
-    List<UsuarioDTO> toDTO(List<Usuario> listEntity);
+    @Mapping(source = "personaDTO", target = "persona", qualifiedByName = "conversorpersonaEntity")
+    public abstract Usuario toEntity(UsuarioDTO dto);
 
-    List<Usuario> toEntity(List<UsuarioDTO> listDTOs);
+    public abstract List<UsuarioDTO> toDTO(List<Usuario> listEntity);
+
+    public abstract List<Usuario> toEntity(List<UsuarioDTO> listDTOs);
+
+    @Named(value = "conversorpersonaEntity")
+    Persona conversor(PersonaDTO dto){
+        return personaService.getById(dto.getId());
+    }
+
+    @Named(value = "conversorpersonaDTO")
+    PersonaDTO convertir(Persona entity){
+        return personaMapper.toDTO(entity);
+    }
 }
