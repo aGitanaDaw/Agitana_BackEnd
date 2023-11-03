@@ -17,6 +17,6 @@ public class Almacen_usuario {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
-    private com.example.agitana.models.Usuario usuario;
+    private Usuario usuario;
 
 }

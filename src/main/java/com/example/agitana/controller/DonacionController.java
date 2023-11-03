@@ -3,6 +3,7 @@ package com.example.agitana.controller;
 
 
 import com.example.agitana.Repository.DonacionRepository;
+import com.example.agitana.dto.DonacionDTO;
 import com.example.agitana.models.Donacion;
 
 import com.example.agitana.service.DonacionService;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/donacion")
+@RequestMapping(path = "/Admin/Donaciones")
 @CrossOrigin(origins = "http://localhost:4200")
 public class DonacionController {
 
@@ -27,30 +28,23 @@ public class DonacionController {
     }
 
     @GetMapping(value = "/listar")
-    public List<Donacion> listarDonacion() {
+    public List<DonacionDTO> listarDonacion() {
         return donacionService.listarDonacion();
     }
 
     @PostMapping(value = "/crear")
-    public ResponseEntity<Donacion> crearDonacion(Donacion donacion) {
-       try {
-        Donacion _donacion = donacionRepository.save(new Donacion(donacion.getId(),donacion.getCantidad(), donacion.getDescripcion_producto(),
-                    donacion.getId_tipo(), donacion.getId_persona(), donacion.getEstado()));
-            return new ResponseEntity<>(_donacion, HttpStatus.CREATED);
-       } catch (Exception e) {
-           return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public DonacionDTO crearDonacion(@RequestBody DonacionDTO dto){
+        return donacionService.crearDonacion(dto);
+    }
 
-  }
+    @PutMapping(value = "/modificar")
+    public Donacion modificarDonacion(@RequestBody DonacionDTO donacionDTO){
+        return donacionService.modificarDonacion(donacionDTO);
+    }
 
-    @DeleteMapping("/donacion/{id}")
-    public ResponseEntity<HttpStatus> eliminarDonacion(@PathVariable("id") long id) {
-        try {
-            donacionRepository.deleteById((int) id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarDonacion(@RequestBody DonacionDTO donacionDTO){
+        return donacionService.eliminarDonacion(donacionDTO);
     }
 
 }

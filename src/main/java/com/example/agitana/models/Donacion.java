@@ -1,5 +1,6 @@
 package com.example.agitana.models;
 
+import com.example.agitana.enums.TipoSolicitud;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
@@ -21,15 +22,16 @@ public class Donacion {
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @Column(name = "id_tipo")
-    private Integer id_tipo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo")
+    private Tipo tipo;
 
-    @Column(name = "id_persona")
-    private Integer id_persona;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_persona")
+    private Persona persona;
 
     @Column(name = "estado")
-    private String estado;
+    @Enumerated(EnumType.ORDINAL)
+    private TipoSolicitud estado;
 
-    public Donacion(Integer id,Integer cantidad, String descripcionProducto, Integer idTipo, Integer idPersona, String estado) {
-    }
 }

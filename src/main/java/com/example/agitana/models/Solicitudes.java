@@ -25,8 +25,8 @@ public class Solicitudes {
     private Almacen almacen;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona")
-    private com.example.agitana.models.Persona persona;
+    private Persona persona;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
-    private com.example.agitana.models.Categoria categoria;
+    private Categoria categoria;
 }
