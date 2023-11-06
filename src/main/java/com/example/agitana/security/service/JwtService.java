@@ -87,7 +87,6 @@ public class JwtService{
         TokenDataDTO tokenDataDTO = TokenDataDTO
                 .builder()
                 .username(persona.getNombre())
-                .rol(String.valueOf(usuarioDTO.getTipoRol()))
                 .fecha_creacion(System.currentTimeMillis())
                 .fecha_expiracion(System.currentTimeMillis() + 1000 * 60 * 60 * 3)
                 .build();

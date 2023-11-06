@@ -33,6 +33,9 @@ public class AuthController {
                 .builder()
                 .token(token)
                 .message("Usuario creado correctamente")
+                .rol(String.valueOf(usuarioNuevo.getTipoRol()))
+                .tipo(String.valueOf(usuarioNuevo.getPersona().getTipoPersona()))
+                .id(usuarioNuevo.getId())
                 .build();
     }
 
