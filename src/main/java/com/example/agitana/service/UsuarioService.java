@@ -43,8 +43,10 @@ public class UsuarioService implements UserDetailsService {
 
     }
 
-    public UsuarioDTO save(UsuarioDTO usuarioDTO) {
-        return usuarioMapper.toDTO(usuarioRepository.save(usuarioMapper.toEntity(usuarioDTO)));
+    public Usuario save(UsuarioDTO dto) {
+        Usuario entity = usuarioMapper.toEntity(dto);
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        return usuarioRepository.save(entity);
     }
 
     public Boolean existByCredentials(String username, String password) {

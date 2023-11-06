@@ -1,6 +1,9 @@
 package com.example.agitana.security.service;
 
+import com.example.agitana.dto.UsuarioDTO;
+import com.example.agitana.models.Persona;
 import com.example.agitana.models.Usuario;
+import com.example.agitana.security.auth.TokenDataDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -77,6 +80,23 @@ public class JwtService{
 
     private Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
+    }
+
+    public String generateToken(Persona persona){
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        TokenDataDTO tokenDataDTO = TokenDataDTO
+                .builder()
+                .username(persona.getNombre())
+                .rol(String.valueOf(usuarioDTO.getTipoRol()))
+                .fecha_creacion(System.currentTimeMillis())
+                .fecha_expiracion(System.currentTimeMillis() + 1000 * 60 * 60 * 3)
+                .build();
+
+        return Jwts
+                .builder()
+                .claim("tokenDataDTO", tokenDataDTO)
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
 

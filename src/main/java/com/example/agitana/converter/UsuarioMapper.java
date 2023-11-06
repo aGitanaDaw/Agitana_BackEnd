@@ -20,23 +20,22 @@ public abstract class UsuarioMapper {
     protected PersonaService personaService;
     PersonaMapper personaMapper = Mappers.getMapper(PersonaMapper.class);
 
-    @Mapping(source = "persona", target = "personaDTO", qualifiedByName = "conversorpersonaDTO")
+    @Mapping(source = "persona", target = "personaDTO", qualifiedByName = "transformarPersona")
     public abstract UsuarioDTO toDTO(Usuario entity);
 
-    @Mapping(source = "personaDTO", target = "persona", qualifiedByName = "conversorpersonaEntity")
+    @Mapping(source = "personaDTO", target = "persona", qualifiedByName = "transformarPersonaDTO")
     public abstract Usuario toEntity(UsuarioDTO dto);
+    public abstract List<Usuario> toEntity(List<UsuarioDTO> dtos);
 
-    public abstract List<UsuarioDTO> toDTO(List<Usuario> listEntity);
+    public  abstract List<UsuarioDTO> toDTO(List<Usuario> entities);
 
-    public abstract List<Usuario> toEntity(List<UsuarioDTO> listDTOs);
 
-    @Named(value = "conversorpersonaEntity")
-    Persona conversor(PersonaDTO dto){
-        return personaService.getById(dto.getId());
+    @Named("transformarPersonaDTO")
+     Persona transformarPersonaDTO(PersonaDTO dto){
+        return personaMapper.toEntity(dto);
     }
-
-    @Named(value = "conversorpersonaDTO")
-    PersonaDTO convertir(Persona entity){
+    @Named("transformarPersona")
+    PersonaDTO transformarPersona(Persona entity){
         return personaMapper.toDTO(entity);
     }
 }

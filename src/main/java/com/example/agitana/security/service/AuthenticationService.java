@@ -5,6 +5,7 @@ package com.example.agitana.security.service;
 import com.example.agitana.converter.UsuarioMapper;
 import com.example.agitana.dto.LoginDTO;
 import com.example.agitana.dto.UsuarioDTO;
+import com.example.agitana.models.Usuario;
 import com.example.agitana.security.auth.AuthenticationResponseDTO;
 import com.example.agitana.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -32,15 +33,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticationResponseDTO register(UsuarioDTO usuarioDTO){
-        usuarioDTO.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
-        UsuarioDTO dto = usuarioService.save(usuarioDTO);
-        String token = jwtService.generateToken(usuarioMapper.toEntity(dto));
-        return AuthenticationResponseDTO
-                .builder()
-                .token(token)
-                .build();
-    }
+
 
     public AuthenticationResponseDTO login(LoginDTO loginDTO){
         UsuarioDTO user = usuarioService.getByUsername(loginDTO.getUsername());

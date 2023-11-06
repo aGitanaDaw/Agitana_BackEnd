@@ -14,4 +14,5 @@ public interface PersonaMapper {
     List<PersonaDTO> toDTO(List<Persona> listEntity);
 
     List<Persona> toEntity(List<PersonaDTO> listDTOs);
+
 }
