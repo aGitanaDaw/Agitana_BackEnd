@@ -1,18 +1,19 @@
 package com.example.agitana.controller;
+import com.example.agitana.dto.SolicitudesDTO;
+import com.example.agitana.dto.TipoDTO;
 import com.example.agitana.models.Solicitudes;
 import com.example.agitana.service.SolicitudesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/Solicitudes")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(path = "Admin/Solicitudes")
 public class SolicitudesController {
-    //crear, eliminar y listar
+
+
     private final SolicitudesService solicitudesService;
 
     @Autowired
@@ -20,8 +21,24 @@ public class SolicitudesController {
         this.solicitudesService = solicitudesService;
     }
 
-    // @GetMapping(value = "/listar")
-    // public List<Solicitudes> listarSolicitudes() {
-    // return solicitudesService.listarSolicitudes();
-    // }
+    @GetMapping(value = "/listar")
+    public List<SolicitudesDTO> listarSolicitudes() {
+        return solicitudesService.listarSolicitudes();
+    }
+
+
+    @PostMapping(value = "/crear")
+    public SolicitudesDTO createSolicitud(@RequestBody SolicitudesDTO dto){
+        return solicitudesService.createSolicitudes(dto);
+    }
+
+    @PutMapping(value = "/modificar")
+    public Solicitudes modificarSolicitud(@RequestBody SolicitudesDTO solicitudesDTO){
+        return solicitudesService.modificarSolicitudes(solicitudesDTO);
+    }
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarSolicitudes(@RequestBody SolicitudesDTO solicitudesDTO){
+        return solicitudesService.eliminarSolicitud(solicitudesDTO);
+    }
+
 }
