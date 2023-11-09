@@ -50,7 +50,7 @@ public class AuthenticationService {
                     return AuthenticationResponseDTO
                             .builder()
                             .token(token)
-                            .message("Login success")
+                            .message("Acceso Concedido")
                             .rol(user.getTipoRol().name())
                             .id(user.getId())
                             .build();
@@ -59,7 +59,7 @@ public class AuthenticationService {
                     return AuthenticationResponseDTO
                             .builder()
                             .token(token)
-                            .message("Login success")
+                            .message("Acceso Concedido")
                             .rol(user.getTipoRol().name())
                             .tipo(String.valueOf(user.getPersonaDTO().getTipoPersona()))
                             .id(user.getId())

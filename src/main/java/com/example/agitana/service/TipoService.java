@@ -39,4 +39,31 @@ public class TipoService {
 
         return  tipoDTO;
     }
+
+    public TipoDTO createTipo(TipoDTO tipoDTO){
+        return tipoMapper.toDTO(tipoRepository.save(tipoMapper.toEntity(tipoDTO)));
+    }
+
+    public Tipo modificarTipo(TipoDTO tipoDTO){
+        Tipo tipo = tipoRepository.findById(tipoDTO.getId()).orElse(null);
+
+        if(tipo == null){
+            return null;
+        }else{
+            tipo.setNombre(tipoDTO.getNombre());
+            Tipo tipomodificado = tipoRepository.save(tipo);
+            return tipomodificado;
+
+        }
+
+    }
+    public String eliminarTipo(TipoDTO tipoDTO){
+        Tipo tipoEliminar = tipoRepository.findById(tipoDTO.getId()).orElse(null);
+        if(tipoEliminar != null){
+            tipoRepository.delete(tipoEliminar);
+            return "Datos eliminados correctamente";
+        }else{
+            return "No se ha podido eliminar su producto";
+        }
+    }
 }

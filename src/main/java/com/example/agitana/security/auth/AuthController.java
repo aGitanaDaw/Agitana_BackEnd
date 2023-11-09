@@ -44,7 +44,7 @@ public class AuthController {
         if(authenticationService.verifyPassword(loginDTO)){
             return authenticationService.login(loginDTO);
         }else{
-            return AuthenticationResponseDTO.builder().message("Invalid credentials").build();
+            return AuthenticationResponseDTO.builder().message("Error en contraseña o Usuario").build();
         }
     }
 }

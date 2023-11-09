@@ -1,14 +1,11 @@
 package com.example.agitana.controller;
 
-import com.example.agitana.dto.CategoriaDTO;
+
 import com.example.agitana.dto.TipoDTO;
-import com.example.agitana.service.CategoriaService;
+import com.example.agitana.models.Tipo;
 import com.example.agitana.service.TipoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
@@ -25,5 +22,19 @@ public class TipoController {
     @GetMapping(value = "/listar")
     public List<TipoDTO> listarTipo() {
         return tipoService.listarTipo();
+    }
+
+    @PostMapping(value = "/crear")
+    public TipoDTO createTipo(@RequestBody TipoDTO dto){
+
+        return tipoService.createTipo(dto);
+    }
+    @PutMapping(value = "/modificar")
+    public Tipo tipoUsuario(@RequestBody TipoDTO tipoDTO){
+        return tipoService.modificarTipo(tipoDTO);
+    }
+    @DeleteMapping(value = "/eliminar")
+    public String eliminarTipo(@RequestBody TipoDTO tipoDTO){
+        return tipoService.eliminarTipo(tipoDTO);
     }
 }

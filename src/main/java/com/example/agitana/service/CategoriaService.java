@@ -40,5 +40,31 @@ public class CategoriaService {
 
         return  categoriaDTO;
 }
+    public CategoriaDTO createCategoria(CategoriaDTO categoriaDTO){
+        return categoriaMapper.toDTO(categoriaRepository.save(categoriaMapper.toEntity(categoriaDTO)));
+    }
+    public Categoria modificarCategoria(CategoriaDTO categoriaDTO){
+        Categoria categoria = categoriaRepository.findById(categoriaDTO.getId()).orElse(null);
+
+        if(categoria == null){
+            return null;
+        }else{
+            categoria.setNombre(categoriaDTO.getNombre());
+            categoria.setDescripcion(categoriaDTO.getDescripcion());
+            Categoria categoriaModificado = categoriaRepository.save(categoria);
+            return categoriaModificado;
+
+        }
+
+    }
+    public String eliminarCategoria(CategoriaDTO categoriaDTO){
+        Categoria categoriaEliminar = categoriaRepository.findById(categoriaDTO.getId()).orElse(null);
+        if(categoriaEliminar != null){
+            categoriaRepository.delete(categoriaEliminar);
+            return "Datos eliminados correctamente";
+        }else{
+            return "No se ha podido eliminar su producto";
+        }
+    }
 
 }
