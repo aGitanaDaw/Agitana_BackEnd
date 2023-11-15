@@ -1,5 +1,6 @@
 package com.example.agitana.service;
 
+import com.example.agitana.Repository.CategoriaRepository;
 import com.example.agitana.Repository.DonacionRepository;
 import com.example.agitana.Repository.PersonaRepository;
 import com.example.agitana.Repository.TipoRepository;
@@ -22,6 +23,8 @@ public class DonacionService {
     private TipoRepository tipoRepository;
     @Autowired
     private PersonaRepository personaRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     public DonacionService(DonacionRepository Donacionrepository, DonacionRepository donacionrepository) {
         this.donacionRepository = donacionrepository;
@@ -42,13 +45,12 @@ public class DonacionService {
             return null;
         }else{
 
-            Tipo tipo = tipoRepository.findById(donacionDTO.getTipoDTO().getId()).orElse(null);
+            Categoria categoria = categoriaRepository.findById(donacionDTO.getCategoriaDTO().getId()).orElse(null);
             Persona persona = personaRepository.findById(donacionDTO.getPersonaDTO().getId()).orElse(null);
 
 
             donacion.setDescripcion_producto(donacionDTO.getDescripcion_producto());
-            donacion.setCantidad(donacionDTO.getCantidad());
-            donacion.setTipo(tipo);
+            donacion.setCategoria(categoria);
             donacion.setPersona(persona);
             donacion.setEstado(donacionDTO.getEstado());
             Donacion donacionModificado = donacionRepository.save(donacion);

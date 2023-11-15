@@ -26,14 +26,18 @@ public abstract class DonacionMapper {
     protected TipoService tipoService;
     @Autowired
     protected PersonaMapper personaMapper;
+    @Autowired
+    protected CategoriaService categoriaService;
+    @Autowired
+    protected CategoriaMapper categoriaMapper;
 
 
     @Mapping(source = "persona", target = "personaDTO", qualifiedByName = "conversorPersonaDTO")
-    @Mapping(source = "tipo", target = "tipoDTO", qualifiedByName = "conversorTipoDTO")
+    @Mapping(source = "categoria", target = "categoriaDTO", qualifiedByName = "conversorCategoriaDTO")
     public abstract DonacionDTO toDTO(Donacion entity);
 
     @Mapping(source = "personaDTO", target = "persona", qualifiedByName = "conversorPersonaEntity")
-    @Mapping(source = "tipoDTO", target = "tipo", qualifiedByName = "conversorTipoEntity")
+    @Mapping(source = "categoriaDTO", target = "categoria", qualifiedByName = "conversorCategoriaEntity")
     public abstract Donacion toEntity(DonacionDTO dto);
 
     public abstract List<DonacionDTO> toDTO(List<Donacion> listEntity);
@@ -48,13 +52,13 @@ public abstract class DonacionMapper {
         return personaMapper.toDTO(entity);
     }
 
-    @Named(value = "conversorTipoEntity")
-    Tipo conversor(TipoDTO dto){
-        return tipoService.getById(dto.getId());
+    @Named(value = "conversorCategoriaEntity")
+    Categoria conversor(CategoriaDTO dto){
+        return categoriaService.getById(dto.getId());
     }
 
-    @Named(value = "conversorTipoDTO")
-    TipoDTO convertir(Tipo entity){
-        return tipoMapper.toDTO(entity);
+    @Named(value = "conversorCategoriaDTO")
+    CategoriaDTO convertir(Categoria entity){
+        return categoriaMapper.toDTO(entity);
     }
 }

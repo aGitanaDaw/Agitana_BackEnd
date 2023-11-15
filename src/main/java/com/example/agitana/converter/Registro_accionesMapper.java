@@ -20,12 +20,12 @@ public abstract class Registro_accionesMapper {
     DonacionService donacionService;
     DonacionMapper donacionMapper = Mappers.getMapper(DonacionMapper.class);
     SolicitudesMapper solicitudesMapper = Mappers.getMapper(SolicitudesMapper.class);
-    @Mapping(source = "categoria", target = "categoriaDTO", qualifiedByName = "conversorCategoriaDTO")
-    @Mapping(source = "tipo", target = "tipoDTO", qualifiedByName = "conversorTipoDTO")
+    @Mapping(source = "solicitudes", target = "solicitudesDTO", qualifiedByName = "conversorSolicitudesDTO")
+    @Mapping(source = "donacion", target = "donacionDTO", qualifiedByName = "conversorDonacionDTO")
     public abstract Registro_accionesDTO toDTO(Registro_acciones entity);
 
-    @Mapping(source = "categoriaDTO", target = "categoria", qualifiedByName = "conversorCategoriaEntity")
-    @Mapping(source = "tipoDTO", target = "tipo", qualifiedByName = "conversorTipoEntity")
+    @Mapping(source = "solicitudesDTO", target = "solicitudes", qualifiedByName = "conversorSolicitudesEntity")
+    @Mapping(source = "donacionDTO", target = "donacion", qualifiedByName = "conversorDonacionEntity")
     public abstract Registro_acciones toEntity(Registro_accionesDTO dto);
 
     public abstract List<Registro_accionesDTO> toDTO(List<Registro_acciones> listEntity);
@@ -41,12 +41,12 @@ public abstract class Registro_accionesMapper {
     SolicitudesDTO convertir(Solicitudes entity){
         return solicitudesMapper.toDTO(entity);
     }
-    @Named(value = "conversorTipoEntity")
+    @Named(value = "conversorDonacionEntity")
     Donacion conversor(DonacionDTO dto){
         return donacionService.getById(dto.getId());
     }
 
-    @Named(value = "conversorTipoDTO")
+    @Named(value = "conversorDonacionDTO")
     DonacionDTO convertir(Donacion entity){
         return donacionMapper.toDTO(entity);
     }
