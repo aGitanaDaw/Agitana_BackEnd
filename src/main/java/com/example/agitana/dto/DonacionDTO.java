@@ -5,8 +5,7 @@ import lombok.Data;
 @Data
 public class DonacionDTO {
     private Integer id;
-    private Integer cantidad;
-    private TipoDTO tipoDTO;
+    private CategoriaDTO categoriaDTO;
     private String  descripcion_producto;
     private PersonaDTO personaDTO;
     private TipoSolicitud estado;

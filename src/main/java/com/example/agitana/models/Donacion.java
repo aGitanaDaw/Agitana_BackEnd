@@ -19,12 +19,9 @@ public class Donacion {
     @Column(name = "descripcion_producto")
     private String descripcion_producto;
 
-    @Column(name = "cantidad")
-    private Integer cantidad;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tipo")
-    private Tipo tipo;
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona")

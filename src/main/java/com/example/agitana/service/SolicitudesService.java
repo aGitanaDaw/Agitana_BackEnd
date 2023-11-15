@@ -68,4 +68,7 @@ public class SolicitudesService {
             return "No se ha podido eliminar el producto";
         }
     }
+    public Solicitudes getById(Integer id){
+        return solicitudesRepository.findById(id).orElse(null);
+    }
 }
