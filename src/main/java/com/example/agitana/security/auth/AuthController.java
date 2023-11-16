@@ -29,14 +29,25 @@ public class AuthController {
         Usuario usuarioNuevo = usuarioService.save(usuarioDTO);
         String token = jwtService.generateToken(usuarioNuevo.getPersona());
 
-        return AuthenticationResponseDTO
-                .builder()
-                .token(token)
-                .message("Usuario creado correctamente")
-                .rol(String.valueOf(usuarioNuevo.getTipoRol()))
-                .tipo(String.valueOf(usuarioNuevo.getPersona().getTipoPersona()))
-                .id(usuarioNuevo.getId())
-                .build();
+        if(usuarioNuevo.getTipoRol().name()=="ADMIN"){
+            return AuthenticationResponseDTO
+                    .builder()
+                    .token(token)
+                    .message("Acceso Concedido")
+                    .rol(usuarioNuevo.getTipoRol().name())
+                    .id(usuarioNuevo.getId())
+                    .build();
+
+        }else{
+            return AuthenticationResponseDTO
+                    .builder()
+                    .token(token)
+                    .message("Acceso Concedido")
+                    .rol(usuarioNuevo.getTipoRol().name())
+                    .tipo(String.valueOf(usuarioNuevo.getPersona().getTipoPersona()))
+                    .id(usuarioNuevo.getId())
+                    .build();
+        }
     }
 
     @PostMapping("/login")
