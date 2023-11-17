@@ -6,12 +6,15 @@ import com.example.agitana.Repository.PersonaRepository;
 import com.example.agitana.Repository.TipoRepository;
 import com.example.agitana.converter.DonacionMapper;
 import com.example.agitana.dto.DonacionDTO;
+import com.example.agitana.dto.SolicitudesDTO;
 import com.example.agitana.models.*;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Getter
 public class DonacionService {
@@ -32,6 +35,18 @@ public class DonacionService {
     public List<DonacionDTO> listarDonacion() {
         return donacionMapper.toDTO(donacionRepository.findAll());
     }
+
+    public DonacionDTO listarDonacionPorId(Integer id) {
+        Optional<Donacion> donacionOptional = donacionRepository.findById(id);
+
+        if (donacionOptional.isPresent()) {
+            Donacion donacion = donacionOptional.get();
+            return donacionMapper.toDTO(donacion);
+        } else {
+            return null;
+        }
+    }
+
     public Donacion getById(Integer id){
         return donacionRepository.findById(id).orElse(null);
     }

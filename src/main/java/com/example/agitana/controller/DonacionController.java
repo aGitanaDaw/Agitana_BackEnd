@@ -4,6 +4,7 @@ package com.example.agitana.controller;
 
 import com.example.agitana.Repository.DonacionRepository;
 import com.example.agitana.dto.DonacionDTO;
+import com.example.agitana.dto.SolicitudesDTO;
 import com.example.agitana.models.Donacion;
 
 import com.example.agitana.service.DonacionService;
@@ -30,6 +31,17 @@ public class DonacionController {
     @GetMapping(value = "/listar")
     public List<DonacionDTO> listarDonacion() {
         return donacionService.listarDonacion();
+    }
+
+    @GetMapping(value = "/listar/{id}")
+    public ResponseEntity<DonacionDTO> listarSolicitudesPorId(@PathVariable Integer id) {
+        DonacionDTO donacionesDTO = donacionService.listarDonacionPorId(id);
+
+        if (donacionesDTO != null) {
+            return ResponseEntity.ok(donacionesDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping(value = "/crear")
