@@ -93,4 +93,7 @@ public class UsuarioService implements UserDetailsService {
             return null;
         }
     }
+    public List<UsuarioDTO> buscarPorNombre(String username){
+        return usuarioMapper.toDTO(usuarioRepository.buscarPorNombre(username));
+    }
 }

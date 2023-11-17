@@ -60,6 +60,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
+                                .requestMatchers("/clases/gestion/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers("/clases/cliente/**").hasAnyAuthority(TipoRol.ADMIN.name())
                                 .requestMatchers("/Admin/**").hasAnyAuthority(TipoRol.ADMIN.name())
                                 .requestMatchers("/User/**").hasAnyAuthority(TipoRol.USER.name())
                                 .requestMatchers(GET, "/Persona/**").hasAnyAuthority(TipoRol.ADMIN.name())
