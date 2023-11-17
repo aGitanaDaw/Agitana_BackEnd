@@ -4,12 +4,10 @@ package com.example.agitana.controller;
 
 import com.example.agitana.Repository.DonacionRepository;
 import com.example.agitana.dto.DonacionDTO;
-import com.example.agitana.dto.SolicitudesDTO;
 import com.example.agitana.models.Donacion;
 
 import com.example.agitana.service.DonacionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

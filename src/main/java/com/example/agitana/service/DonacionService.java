@@ -6,7 +6,6 @@ import com.example.agitana.Repository.PersonaRepository;
 import com.example.agitana.Repository.TipoRepository;
 import com.example.agitana.converter.DonacionMapper;
 import com.example.agitana.dto.DonacionDTO;
-import com.example.agitana.dto.SolicitudesDTO;
 import com.example.agitana.models.*;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import java.util.Optional;
 @Getter
 public class DonacionService {
     @Autowired
-    private final DonacionRepository donacionRepository;
+    private DonacionRepository donacionRepository;
     @Autowired
     private DonacionMapper donacionMapper;
     @Autowired
@@ -29,9 +28,6 @@ public class DonacionService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public DonacionService(DonacionRepository Donacionrepository, DonacionRepository donacionrepository) {
-        this.donacionRepository = donacionrepository;
-    }
     public List<DonacionDTO> listarDonacion() {
         return donacionMapper.toDTO(donacionRepository.findAll());
     }
