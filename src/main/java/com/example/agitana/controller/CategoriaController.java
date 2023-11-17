@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "Admin/Categoria")
+@RequestMapping(path = {"User/Categoria", "Admin/Categoria"})
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaController {
 

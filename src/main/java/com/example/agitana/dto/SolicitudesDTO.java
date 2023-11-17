@@ -9,5 +9,5 @@ public class SolicitudesDTO {
     private AlmacenDTO almacenDTO;
     private PersonaDTO personaDTO;
     private CategoriaDTO categoriaDTO;
-    private TipoSolicitud tipoSolicitud;
+    private TipoSolicitud estado;
 }

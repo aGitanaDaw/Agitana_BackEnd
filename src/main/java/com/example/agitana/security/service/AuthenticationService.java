@@ -63,6 +63,7 @@ public class AuthenticationService {
                             .rol(user.getTipoRol().name())
                             .tipo(String.valueOf(user.getPersonaDTO().getTipoPersona()))
                             .id(user.getId())
+                            .idPersona(user.getPersonaDTO().getId())
                             .build();
                 }
 

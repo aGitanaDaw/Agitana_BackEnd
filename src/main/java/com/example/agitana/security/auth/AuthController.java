@@ -46,6 +46,7 @@ public class AuthController {
                     .rol(usuarioNuevo.getTipoRol().name())
                     .tipo(String.valueOf(usuarioNuevo.getPersona().getTipoPersona()))
                     .id(usuarioNuevo.getId())
+                    .idPersona(usuarioNuevo.getPersona().getId())
                     .build();
         }
     }

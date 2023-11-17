@@ -16,4 +16,5 @@ public class AuthenticationResponseDTO {
     private String rol;
     private String tipo;
     private Integer id;
+    private Integer idPersona;
 }

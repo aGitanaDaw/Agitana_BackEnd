@@ -3,6 +3,7 @@ package com.example.agitana.service;
 import com.example.agitana.Repository.*;
 import com.example.agitana.converter.SolicitudesMapper;
 import com.example.agitana.dto.AlmacenDTO;
+import com.example.agitana.dto.ProductoDTO;
 import com.example.agitana.dto.SolicitudesDTO;
 import com.example.agitana.models.*;
 import lombok.Getter;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Getter
 public class SolicitudesService {
@@ -32,6 +35,17 @@ public class SolicitudesService {
     public List<SolicitudesDTO> listarSolicitudes() {
         return solicitudesMapper.toDTO(solicitudesRepository.findAll());
     }
+
+    public SolicitudesDTO listarSolicitudPorId(Integer id) {
+        Optional<Solicitudes> solicitudOptional = solicitudesRepository.findById(id);
+
+        if (solicitudOptional.isPresent()) {
+            Solicitudes solicitud = solicitudOptional.get();
+            return solicitudesMapper.toDTO(solicitud);
+        } else {
+            return null;
+        }
+    }
     public SolicitudesDTO createSolicitudes(SolicitudesDTO solicitudesDTO){
         return solicitudesMapper.toDTO(solicitudesRepository.save(solicitudesMapper.toEntity(solicitudesDTO)));
     }
@@ -52,7 +66,7 @@ public class SolicitudesService {
             solicitudes.setAlmacen(almacen);
             solicitudes.setPersona(persona);
             solicitudes.setCategoria(categoria);
-            solicitudes.setTipoSolicitud(solicitudes.getTipoSolicitud());
+            solicitudes.setEstado(solicitudes.getEstado());
             Solicitudes solicitudModificada = solicitudesRepository.save(solicitudes);
             return solicitudModificada;
 

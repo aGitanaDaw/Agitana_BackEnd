@@ -66,7 +66,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(GET, "/Productos/**").hasAnyAuthority(TipoRol.ADMIN.name())
                                 .requestMatchers(GET, "/Usuario/**").hasAnyAuthority(TipoRol.ADMIN.name(), TipoRol.USER.name())
                                 .requestMatchers(GET, "/Tipo/**").hasAnyAuthority(TipoRol.ADMIN.name())
-                                .requestMatchers(GET, "/Categoria/**").hasAnyAuthority(TipoRol.ADMIN.name())
+                                .requestMatchers(GET, "/Categoria/**").hasAnyAuthority(TipoRol.ADMIN.name(), TipoRol.USER.name())
                                 .requestMatchers(GET, "/Stock/**").hasAnyAuthority(TipoRol.ADMIN.name())
                                 .requestMatchers(GET, "/Almacen/**").hasAnyAuthority(TipoRol.ADMIN.name())
                                 .requestMatchers(GET, "/Solicitudes/**").hasAnyAuthority(TipoRol.ADMIN.name(), TipoRol.USER.name())

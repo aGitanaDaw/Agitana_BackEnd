@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController()
-@RequestMapping(path = "/Admin/Donaciones")
+@RequestMapping(path = {"/Admin/Donaciones","/User/Donaciones"})
 @CrossOrigin(origins = "http://localhost:4200")
 public class DonacionController {
 

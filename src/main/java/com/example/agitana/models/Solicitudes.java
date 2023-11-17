@@ -19,7 +19,7 @@ public class Solicitudes {
 
     @Column(name = "estado")
     @Enumerated(EnumType.ORDINAL)
-    private TipoSolicitud tipoSolicitud;
+    private TipoSolicitud estado;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_almacen")
     private Almacen almacen;
