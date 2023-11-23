@@ -1,10 +1,13 @@
 package com.example.agitana.service;
 
+import com.example.agitana.Repository.CategoriaRepository;
 import com.example.agitana.Repository.StockRepository;
 import com.example.agitana.converter.StockMapper;
 import com.example.agitana.dto.AlmacenDTO;
+import com.example.agitana.dto.ProductoDTO;
 import com.example.agitana.dto.StockDTO;
 import com.example.agitana.models.Almacen;
+import com.example.agitana.models.Categoria;
 import com.example.agitana.models.Stock;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class StockService {
     private final StockRepository stockrepository;
     @Autowired
     private StockMapper stockMapper;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     public StockService(StockRepository Stockrepository, StockRepository stockrepository) {
         this.stockrepository = stockrepository;
@@ -33,11 +38,12 @@ public class StockService {
     }
     public Stock modificarStock(StockDTO stockDTO){
         Stock stock = stockrepository.findById(stockDTO.getId()).orElse(null);
-
+        Categoria categoria = categoriaRepository.findById(stockDTO.getCategoriaDTO().getId()).orElse(null);
         if(stock == null){
             return null;
         }else{
             stock.setCantidad(stockDTO.getCantidad());
+            stock.setCategoria(categoria);
             Stock stockModificado = stockrepository.save(stock);
             return stockModificado;
         }
@@ -52,6 +58,8 @@ public class StockService {
             return "No se ha podido eliminar su producto";
         }
     }
-
+    public List<StockDTO> buscarporCategoria(Integer id_categoria){
+        return stockMapper.toDTO(stockrepository.buscarporCategoria(id_categoria));
+    }
 
 }

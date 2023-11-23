@@ -26,13 +26,16 @@ public abstract class StockMapper {
     protected TipoService tipoService;
 
     ProductoMapper productoMapper = Mappers.getMapper(ProductoMapper.class);
+    CategoriaMapper categoriaMapper = Mappers.getMapper(CategoriaMapper.class);
     AlmacenMapper almacenMapper = Mappers.getMapper(AlmacenMapper.class);
 
     @Mapping(source = "producto", target = "productoDTO", qualifiedByName = "conversorProductoDTO")
     @Mapping(source = "almacen", target = "almacenDTO", qualifiedByName = "conversorAlmacenDTO")
+    @Mapping(source = "categoria", target = "categoriaDTO", qualifiedByName = "conversorCategoriaDTO")
     public abstract StockDTO toDTO(Stock entity);
     @Mapping(source = "productoDTO", target = "producto", qualifiedByName = "conversorProductoEntity")
     @Mapping(source = "almacenDTO", target = "almacen", qualifiedByName = "conversorAlmacenEntity")
+    @Mapping(source = "categoriaDTO", target = "categoria", qualifiedByName = "conversorCategoriaEntity")
     public abstract Stock toEntity(StockDTO dto);
 
     public abstract List<StockDTO> toDTO(List<Stock> listEntity);
@@ -57,4 +60,15 @@ public abstract class StockMapper {
     ProductoDTO convertir(Producto entity){
         return productoMapper.toDTO(entity);
     }
+
+    @Named(value = "conversorCategoriaEntity")
+    Categoria conversor(CategoriaDTO dto){
+        return categoriaService.getById(dto.getId());
+    }
+
+    @Named(value = "conversorCategoriaDTO")
+    CategoriaDTO convertir(Categoria entity){
+        return categoriaMapper.toDTO(entity);
+    }
+
 }

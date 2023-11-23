@@ -9,4 +9,5 @@ public class StockDTO {
     private Integer cantidad;
     private ProductoDTO productoDTO;
     private AlmacenDTO almacenDTO;
+    private CategoriaDTO categoriaDTO;
 }

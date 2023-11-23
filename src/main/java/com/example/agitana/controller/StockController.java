@@ -1,5 +1,6 @@
 package com.example.agitana.controller;
 
+import com.example.agitana.dto.ProductoDTO;
 import com.example.agitana.dto.StockDTO;
 import com.example.agitana.models.Stock;
 import com.example.agitana.service.StockService;
@@ -21,6 +22,10 @@ public class StockController {
     @GetMapping(value = "/listar")
     public List<StockDTO> listarStock() {
         return stockService.listarStock();
+    }
+    @GetMapping("/listarCategoria/{id_categoria}")
+    public List<StockDTO> buscarporCategoria(@PathVariable Integer id_categoria){
+        return stockService.buscarporCategoria(id_categoria);
     }
     @PostMapping(value = "/crear")
     public StockDTO createStock(@RequestBody StockDTO dto){
