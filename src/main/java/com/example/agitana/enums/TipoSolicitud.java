@@ -1,5 +1,5 @@
 package com.example.agitana.enums;
 
 public enum TipoSolicitud {
-    PENDIENTE, FINALIZADA, RECHAZADA, ACEPTADA
+    PENDIENTE,PENDIENTE_STOCK, FINALIZADA, RECHAZADA, ACEPTADA
 }

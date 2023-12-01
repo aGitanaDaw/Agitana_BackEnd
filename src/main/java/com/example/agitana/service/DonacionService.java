@@ -52,12 +52,24 @@ public class DonacionService {
     public Donacion modificarDonacion(DonacionDTO donacionDTO){
         Donacion donacion = donacionRepository.findById(donacionDTO.getId()).orElse(null);
 
+        Categoria categoria;
+        Persona persona;
         if(donacion == null){
             return null;
         }else{
 
-            Categoria categoria = categoriaRepository.findById(donacionDTO.getCategoriaDTO().getId()).orElse(null);
-            Persona persona = personaRepository.findById(donacionDTO.getPersonaDTO().getId()).orElse(null);
+            if(donacionDTO.getCategoriaDTO()==null){
+                categoria = donacion.getCategoria();
+            }else{
+                categoria = categoriaRepository.findById(donacionDTO.getCategoriaDTO().getId()).orElse(null);
+            }
+            if(donacionDTO.getPersonaDTO()==null){
+                persona = donacion.getPersona();
+            }else{
+                persona = personaRepository.findById(donacionDTO.getPersonaDTO().getId()).orElse(null);
+            }
+
+
 
 
             donacion.setDescripcion_producto(donacionDTO.getDescripcion_producto());

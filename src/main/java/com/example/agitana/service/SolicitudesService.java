@@ -5,6 +5,7 @@ import com.example.agitana.converter.SolicitudesMapper;
 import com.example.agitana.dto.AlmacenDTO;
 import com.example.agitana.dto.ProductoDTO;
 import com.example.agitana.dto.SolicitudesDTO;
+import com.example.agitana.enums.TipoSolicitud;
 import com.example.agitana.models.*;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,22 +54,43 @@ public class SolicitudesService {
     public Solicitudes modificarSolicitudes(SolicitudesDTO solicitudesDTO){
         Solicitudes solicitudes = solicitudesRepository.findById(solicitudesDTO.getId()).orElse(null);
 
+        Almacen almacen;
+        Persona persona;
+        Categoria categoria;
+        TipoSolicitud estado;
         if(solicitudes == null){
             return null;
         }else{
 
-            Almacen almacen = almacenRepository.findById(solicitudesDTO.getAlmacenDTO().getId()).orElse(null);
-            Persona persona = personaRepository.findById(solicitudesDTO.getPersonaDTO().getId()).orElse(null);
-            Categoria categoria = categoriaRepository.findById(solicitudesDTO.getCategoriaDTO().getId()).orElse(null);
+                if(solicitudesDTO.getAlmacenDTO()==null){
+                    almacen = solicitudes.getAlmacen();
+                }else{
+                    almacen = almacenRepository.findById(solicitudesDTO.getAlmacenDTO().getId()).orElse(null);
+                }
+             if(solicitudesDTO.getPersonaDTO()==null){
+                 persona = solicitudes.getPersona();
+             }else{
+                 persona = personaRepository.findById(solicitudesDTO.getPersonaDTO().getId()).orElse(null);
+             }
 
+             if(solicitudesDTO.getCategoriaDTO()==null){
+                 categoria = solicitudes.getCategoria();
+             }else{
+                 categoria = categoriaRepository.findById(solicitudesDTO.getCategoriaDTO().getId()).orElse(null);
+             }
+            if(solicitudesDTO.getEstado()==null){
+                estado = solicitudes.getEstado();
+            }else{
+                estado = solicitudesDTO.getEstado();
+            }
 
+                solicitudes.setAlmacen(almacen);
+                solicitudes.setPersona(persona);
+                solicitudes.setCategoria(categoria);
+                solicitudes.setEstado(estado);
 
-            solicitudes.setAlmacen(almacen);
-            solicitudes.setPersona(persona);
-            solicitudes.setCategoria(categoria);
-            solicitudes.setEstado(solicitudes.getEstado());
-            Solicitudes solicitudModificada = solicitudesRepository.save(solicitudes);
-            return solicitudModificada;
+            solicitudesRepository.save(solicitudes);
+            return solicitudes;
 
         }
 
