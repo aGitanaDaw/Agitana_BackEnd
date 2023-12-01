@@ -107,4 +107,8 @@ public class SolicitudesService {
     public Solicitudes getById(Integer id){
         return solicitudesRepository.findById(id).orElse(null);
     }
+    public List<SolicitudesDTO> buscarPorId(Integer id_persona) {
+        return solicitudesMapper.toDTO(solicitudesRepository.buscarPorid(id_persona));
+    }
+
 }

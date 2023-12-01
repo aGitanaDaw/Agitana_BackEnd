@@ -90,6 +90,7 @@ public class DonacionService {
             return "No se ha podido eliminar su producto";
         }
     }
-
-
+    public List<DonacionDTO> buscarPorId(Integer id) {
+        return donacionMapper.toDTO(donacionRepository.buscarPorid(id));
+    }
 }

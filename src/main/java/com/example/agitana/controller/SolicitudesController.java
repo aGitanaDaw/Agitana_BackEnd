@@ -38,6 +38,10 @@ public class SolicitudesController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/listarSolicitudes/{id_persona}")
+    public List<SolicitudesDTO> buscarporid(@PathVariable Integer id_persona){
+        return solicitudesService.buscarPorId(id_persona);
+    }
     @PostMapping(value = "/crear")
     public SolicitudesDTO createSolicitud(@RequestBody SolicitudesDTO dto){
         return solicitudesService.createSolicitudes(dto);

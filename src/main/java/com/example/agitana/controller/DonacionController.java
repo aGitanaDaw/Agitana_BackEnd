@@ -41,7 +41,10 @@ public class DonacionController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @GetMapping("/listarDonacion/{id_persona}")
+    public List<DonacionDTO> buscarporid(@PathVariable Integer id_persona){
+        return donacionService.buscarPorId(id_persona);
+    }
     @PostMapping(value = "/crear")
     public DonacionDTO crearDonacion(@RequestBody DonacionDTO dto){
         return donacionService.crearDonacion(dto);
