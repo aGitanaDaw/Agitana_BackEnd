@@ -89,4 +89,8 @@ public class StockService {
         return stockMapper.toDTO(stockrepository.buscarporCategoria(id_categoria));
     }
 
+    public List<StockDTO> buscarporProductos(Integer id_producto){
+        return stockMapper.toDTO(stockrepository.buscarporProductos(id_producto));
+    }
+
 }

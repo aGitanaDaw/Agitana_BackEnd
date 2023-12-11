@@ -13,4 +13,7 @@ public interface StockRepository extends JpaRepository<Stock,Integer> {
 
     @Query(value = "select c.* from {h-schema} stock c where c.id_categoria = :id " , nativeQuery = true)
     List<Stock> buscarporCategoria(Integer id);
+
+    @Query(value = "select c.* from {h-schema} stock c where c.id_producto = :id " , nativeQuery = true)
+    List<Stock> buscarporProductos(Integer id);
 }

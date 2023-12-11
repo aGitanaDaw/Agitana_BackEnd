@@ -27,6 +27,10 @@ public class StockController {
     public List<StockDTO> buscarporCategoria(@PathVariable Integer id_categoria){
         return stockService.buscarporCategoria(id_categoria);
     }
+    @GetMapping("/listarProducto/{id_producto}")
+    public List<StockDTO> buscarporProductos(@PathVariable Integer id_producto){
+        return stockService.buscarporProductos(id_producto);
+    }
     @PostMapping(value = "/crear")
     public StockDTO createStock(@RequestBody StockDTO dto){
 
