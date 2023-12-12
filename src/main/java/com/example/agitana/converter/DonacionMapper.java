@@ -21,16 +21,13 @@ public abstract class DonacionMapper {
     @Autowired
     protected PersonaService personaService;
     @Autowired
-    protected TipoMapper tipoMapper;
-    @Autowired
     protected TipoService tipoService;
     @Autowired
-    protected PersonaMapper personaMapper;
-    @Autowired
     protected CategoriaService categoriaService;
-    @Autowired
-    protected CategoriaMapper categoriaMapper;
 
+
+    PersonaMapper personaMapper = Mappers.getMapper(PersonaMapper.class);
+    CategoriaMapper categoriaMapper = Mappers.getMapper(CategoriaMapper.class);
 
     @Mapping(source = "persona", target = "personaDTO", qualifiedByName = "conversorPersonaDTO")
     @Mapping(source = "categoria", target = "categoriaDTO", qualifiedByName = "conversorCategoriaDTO")
